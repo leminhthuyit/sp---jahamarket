@@ -1,0 +1,44 @@
+@baseUrl = http://localhost:8000/api
+@resourceName = categories
+# Categories:
+
+###
+
+# @name getCategories
+GET {{baseUrl}}/{{resourceName}}
+
+###
+
+# @name filterCategories
+GET {{baseUrl}}/{{resourceName}}?id_lte=5
+
+
+###
+
+# @name filterCategories
+GET {{baseUrl}}/{{resourceName}}?_page=1&_limit=5
+
+###
+
+# @name addCategories
+POST {{baseUrl}}/{{resourceName}}
+Content-Type: application/json
+
+{
+    "name": "laptop"
+}
+
+###
+
+# @name updateCategories
+PATCH {{baseUrl}}/{{resourceName}}/11
+Content-Type: application/json
+
+{
+    "name": "laptop 123456789"
+}
+
+###
+
+# @name updateCategories
+DELETE {{baseUrl}}/{{resourceName}}/12

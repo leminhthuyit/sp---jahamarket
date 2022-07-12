@@ -1,0 +1,43 @@
+@baseUrl = http://localhost:8000/api
+@resourceName = companies
+
+# Companies:
+
+# @name getCompanies
+GET {{baseUrl}}/{{resourceName}}
+
+###
+
+# @name filterCategories
+GET {{baseUrl}}/{{resourceName}}?id_lte=5
+
+
+###
+
+# @name filterCategories
+GET {{baseUrl}}/{{resourceName}}?_page=1&_limit=5
+
+###
+
+# @name addCompanies
+POST {{baseUrl}}/{{resourceName}}
+Content-Type: application/json
+
+{
+    "name": "laptop"
+}
+
+###
+
+# @name updateCompanies
+PATCH {{baseUrl}}/{{resourceName}}/6
+Content-Type: application/json
+
+{
+    "name": "laptop 123456789"
+}
+
+###
+
+# @name updateCompanies
+DELETE {{baseUrl}}/{{resourceName}}/11

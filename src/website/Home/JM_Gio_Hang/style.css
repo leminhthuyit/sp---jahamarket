@@ -1,0 +1,111 @@
+/* .container_drawer {} */
+
+.container_drawer .box_style {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+/* css địa chỉ nhận hàng */
+/* .container_drawer .address_content {} */
+
+.container_drawer .address_content h5 {
+    color: #263C97;
+}
+
+.container_drawer .address_content .input_number {
+    width: 50%;
+}
+
+.container_drawer .address_content input {
+    height: 40px;
+}
+
+/* ===================================================== */
+
+
+/* css thông tin sản phẩm */
+/* .container_drawer .product_content {} */
+
+.container_drawer .product_content .table_drawer {
+    width: 100%;
+    text-align: center;
+}
+
+.product_content .table_drawer tr {
+    border-bottom: 1px solid #d7dbdd;
+}
+
+/* ===================================================== */
+
+
+/* css đơn vị vận chuyển */
+/* .container_drawer .transport_content {} */
+
+/* ===================================================== */
+
+
+/* css Thanh toán */
+.payment_method .pay_content {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #d7dbdd;
+
+}
+
+.payment_method .total_content {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #d7dbdd;
+
+}
+
+.payment_method .total_payment {
+    display: flex;
+    justify-content: space-between;
+}
+
+.payment_method .total_payment .title_pay {
+    padding-left: 38px;
+}
+
+.total_payment .title_pay h4,
+.total_payment .title_pay h5,
+.total_payment .number_pay h4,
+.total_payment .number_pay h5 {
+    color: #21618c;
+}
+
+/* .payment_method .total_payment .number_pay {} */
+
+.payment_method .btn_pay {
+    text-align: end;
+    height: 80px;
+    padding: 15px 0;
+    border-top: 1px solid #d7dbdd;
+}
+
+.payment_method .btn_pay button {
+    width: 210px;
+    height: 52px;
+    color: #fff;
+    transition: all 0.5s ease;
+    background-color: #2196f3;
+    font-weight: 700;
+    /* box-shadow: 0 0px 5px rgba(0, 0, 0, 0.2); */
+}
+
+.payment_method .btn_pay button:hover {
+    color: #2196f3;
+    background-color: #fff;
+    transition: all 0.5s ease;
+}
+
+/* ===================================================== */

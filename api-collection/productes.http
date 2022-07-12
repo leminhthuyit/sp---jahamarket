@@ -1,0 +1,43 @@
+@baseUrl = http://localhost:8000/api
+@resourceName = productes
+
+# Productes:
+
+# @name getProductes
+GET {{baseUrl}}/{{resourceName}}
+
+###
+
+# @name filterCategories
+GET {{baseUrl}}/{{resourceName}}?id_lte=5
+
+
+###
+
+# @name filterCategories
+GET {{baseUrl}}/{{resourceName}}?_page=1&_limit=5
+
+###
+
+# @name addProductes
+POST {{baseUrl}}/{{resourceName}}
+Content-Type: application/json
+
+{
+    "name": "laptop"
+}
+
+###
+
+# @name updateProductes
+PATCH {{baseUrl}}/{{resourceName}}/11
+Content-Type: application/json
+
+{
+    "name": "laptop 123456789"
+}
+
+###
+
+# @name updateProductes
+DELETE {{baseUrl}}/{{resourceName}}/27
