@@ -1,4 +1,4 @@
-@baseUrl = http://localhost:8000/api
+@baseUrl = https://jm-api-json-server.herokuapp.com/api
 @resourceName = categories
 # Categories:
 

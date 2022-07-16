@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import productSlice from '../website/Admin/Page_Quan_Tri/container/Cac_San_Pham/productSlice';
+import productTableSlice from '../Admin Page/Trang_Quan_Tri/Content/Cac_San_Pham/productSlice';
 
 const store = configureStore({
   reducer: {
-    productTable: productSlice.reducer,
+    productTable: productTableSlice.reducer,
   },
 });
 

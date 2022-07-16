@@ -1,47 +1,98 @@
-import BangDieuKhien from "../website/Admin/Page_Quan_Tri/container/Bang_Dieu_Khien";
-import CacSanPham from "../website/Admin/Page_Quan_Tri/container/Cac_San_Pham";
-import CaiDat from "../website/Admin/Page_Quan_Tri/container/Cai_Dat";
-import DonHang from "../website/Admin/Page_Quan_Tri/container/Don_Hang";
-import DSNhanVien from "../website/Admin/Page_Quan_Tri/container/DS_Nhan_Vien";
-import KhachHang from "../website/Admin/Page_Quan_Tri/container/Khach_Hang";
-import LoaiSanPham from "../website/Admin/Page_Quan_Tri/container/Loai_San_Pham";
-import ThuongHieu from "../website/Admin/Page_Quan_Tri/container/Thuong_Hieu";
+import TrangChu from '../User Page/Trang_Chu';
+import DanhMucSanPham from '../User Page/Danh_Muc_San_Pham';
+import ChiTietSanPham from '../User Page/Chi_Tiet_San_Pham';
+import GioHang from '../User Page/Gio_Hang';
+import TraCuuDonHang from '../User Page/Tra_Cuu_Don_Hang';
+import DangNhap from '../User Page/Dang_Nhap';
+import DangKy from '../User Page/Dang_Ky';
+import QuenMatKhau from '../User Page/Quen_Mat_Khau';
+
+import BangDieuKhien from '../Admin Page/Trang_Quan_Tri/Content/Bang_Dieu_Khien';
+import CacSanPham from '../Admin Page/Trang_Quan_Tri/Content/Cac_San_Pham';
+import CaiDat from '../Admin Page/Trang_Quan_Tri/Content/Cai_Dat';
+import DonHang from '../Admin Page/Trang_Quan_Tri/Content/Don_Hang';
+import NhanVien from '../Admin Page/Trang_Quan_Tri/Content/Nhan_Vien';
+import LoaiSanPham from '../Admin Page/Trang_Quan_Tri/Content/Loai_San_Pham';
+import ThuongHieu from '../Admin Page/Trang_Quan_Tri/Content/Thuong_Hieu';
+import ADDangNhap from '../Admin Page/AD_Dang_Nhap';
+import ADQuenMatKhau from '../Admin Page/AD_Quen_Mat_Khau';
 
 const publicRoutes = [
   {
-    path: "/bangdieukhien",
-    component: BangDieuKhien,
+    path: '/',
+    component: TrangChu,
   },
   {
-    path: "/cacsanpham",
-    component: CacSanPham,
+    path: '/danhmucsanpham',
+    component: DanhMucSanPham,
   },
   {
-    path: "/caidat",
-    component: CaiDat,
+    path: '/chitietsanpham',
+    component: ChiTietSanPham,
   },
   {
-    path: "/donhang",
-    component: DonHang,
+    path: '/giohang',
+    component: GioHang,
   },
   {
-    path: "/nhanvien",
-    component: DSNhanVien,
+    path: '/tracuudonhang',
+    component: TraCuuDonHang,
   },
   {
-    path: "/khachhang",
-    component: KhachHang,
+    path: '/dangnhap',
+    component: DangNhap,
   },
   {
-    path: "/loaisanpham",
-    component: LoaiSanPham,
+    path: '/dangky',
+    component: DangKy,
   },
   {
-    path: "/thuonghieu",
-    component: ThuongHieu,
+    path: '/quenmatkhau',
+    component: QuenMatKhau,
+  },
+  {
+    path: '/admin',
+    component: ADDangNhap,
+  },
+  {
+    path: '/admin/quenmatkhau',
+    component: ADQuenMatKhau,
   },
 ];
 
-const privateRoutes = [];
+const privateRoutes = [
+  {
+    path: '/admin/bangdieukhien',
+    component: BangDieuKhien,
+  },
+  {
+    path: '/admin/cacsanpham',
+    component: CacSanPham,
+  },
+  {
+    path: '/admin/caidat',
+    component: CaiDat,
+  },
+  {
+    path: '/admin/donhang',
+    component: DonHang,
+  },
+  {
+    path: '/admin/nhanvien',
+    component: NhanVien,
+  },
+  {
+    path: '/admin/khachhang',
+    component: NhanVien,
+  },
+  {
+    path: '/admin/loaisanpham',
+    component: LoaiSanPham,
+  },
+  {
+    path: '/admin/thuonghieu',
+    component: ThuongHieu,
+  },
+];
 
 export { publicRoutes, privateRoutes };

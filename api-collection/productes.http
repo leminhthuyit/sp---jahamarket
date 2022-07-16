@@ -1,4 +1,4 @@
-@baseUrl = http://localhost:8000/api
+@baseUrl = https://jm-api-json-server.herokuapp.com/api
 @resourceName = productes
 
 # Productes:
@@ -30,7 +30,7 @@ Content-Type: application/json
 ###
 
 # @name updateProductes
-PATCH {{baseUrl}}/{{resourceName}}/11
+PATCH {{baseUrl}}/{{resourceName}}/1
 Content-Type: application/json
 
 {
