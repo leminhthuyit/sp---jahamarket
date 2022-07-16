@@ -1,4 +1,4 @@
-import request from '../utils/request';
+import request from '../Utils/request';
 
 export const productesApi = async () => {
   try {
