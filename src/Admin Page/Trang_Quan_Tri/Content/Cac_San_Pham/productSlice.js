@@ -21,33 +21,41 @@ const productTableSlice = createSlice({
         state.status = 'idle';
       })
       .addCase(addTableApi.fulfilled, (state, action) => {
+        console.log('add state slice:', state);
+        console.log('add action slice:', action);
         state.productes.push(action.payload);
+      })
+      .addCase(updateTableApi.fulfilled, (state, action) => {
+        console.log('state slice:', state);
+        console.log('action slice:', action);
+        // let currentTodo = state.productes.find((p) => p.id === action.payload);
+        // console.log(currentTodo);
+        state.productes = action.payload;
       });
   },
 });
 
 export default productTableSlice;
 
-export const fetchApiTable = createAsyncThunk('productes/fetchApiTable', async () => {
+export const fetchApiTable = createAsyncThunk('product/fetchApiTable', async () => {
   const res = await productesService.productesApi();
   return res;
 });
 
-export const addTableApi = createAsyncThunk('productes/addTableApi', async (newTodo) => {
+export const addTableApi = createAsyncThunk('product/addTableApi', async (newTodo) => {
+  // console.log('newTodo slice:', newTodo);
   const res = await productesService.addProductesApi(newTodo);
   return res;
 });
 
-export const updateTableApi = createAsyncThunk(
-  'productes/updateTableApi',
-  async (idTable, newTodo) => {
-    const res = await productesService.updateProductesApi(idTable, newTodo);
-    console.log('idTable: ', idTable);
-    console.log('newTodo: ', newTodo);
-    console.log('UpdateProduct: ', res);
-    return res;
-  }
-);
+export const updateTableApi = createAsyncThunk('product/updateTableApi', async (newTodo) => {
+  // console.log('id slice:', id);
+  // console.log('newTodo slice:', newTodo);
+  const id = newTodo.id;
+  const res = await productesService.updateProductesApi(id, newTodo);
+  console.log('res:', res);
+  return res;
+});
 
 /*
  => todos/fetchApiTable/pending

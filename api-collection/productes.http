@@ -1,5 +1,5 @@
-@baseUrl = https://jm-api-json-server.herokuapp.com/api
-@resourceName = productes
+@baseUrl = http://localhost:8000/api
+@resourceName = sanpham
 
 # Productes:
 
@@ -40,4 +40,4 @@ Content-Type: application/json
 ###
 
 # @name updateProductes
-DELETE {{baseUrl}}/{{resourceName}}/27
+DELETE {{baseUrl}}/{{resourceName}}/NPKR-OD

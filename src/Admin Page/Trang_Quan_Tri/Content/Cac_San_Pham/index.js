@@ -30,17 +30,17 @@ const { TextArea } = Input;
 */
 
 const CacSanPham = () => {
-  const [dataTable, setDataTable] = useState('');
+  const [visibleAdd, setVisibleAdd] = useState(false);
+
+  const [visibleUpdate, setVisibleUpdate] = useState(false);
+
+  const [visibleView, setVisibleView] = useState(false);
 
   const [searchTxt, setSearchTxt] = useState('');
 
-  const [visible, setVisible] = useState(false);
+  const [dbAddProduct, setDBAddProduct] = useState({});
 
-  const [updateProduct, setUpdateProduct] = useState(false);
-
-  const [productDetails, setProductDetails] = useState(false);
-
-  const [defaultValueUpdate, setDefaultValueUpdate] = useState({});
+  const [selectUpdate, setSelectUpdate] = useState({});
 
   const [valueUpdate, setValueUpdate] = useState({});
 
@@ -52,86 +52,79 @@ const CacSanPham = () => {
 
   useEffect(() => {
     dispatch(fetchApiTable());
-  }, []);
-
-  useEffect(() => {
-    dispatch(fetchApiTable());
-  }, []);
+  }, [dispatch]);
 
   //========= Tìm kiếm sản phẩm ==========
-  const handleSearchTxtChange = (e) => {
+  function handleSearchTxtChange(e) {
     setSearchTxt(e.target.value);
-  };
+  }
 
   //=== Thêm Sản Phẩm ================
-  const handleAddBtnClick = () => {
+  const AddBtnOnClick = () => {
     dispatch(
       addTableApi({
-        id: dataTable.user.id,
-        name: dataTable.user.name,
-        price: dataTable.user.price,
-        amount: dataTable.user.amount,
-        categoryId: dataTable.user.categoryId,
-        trademarkId: dataTable.user.trademarkId,
-        describe: dataTable.user.describe,
+        TenSanPham: dbAddProduct.TenSanPham,
+        Gia: dbAddProduct.Gia,
+        SoLuong: dbAddProduct.SoLuong,
+        DanhMucSanPham: dbAddProduct.DanhMucSanPham,
+        ThuongHieu: dbAddProduct.ThuongHieu,
+        MoTa: dbAddProduct.MoTa,
       })
     );
-
-    setVisible(false);
+    setVisibleAdd(false);
   };
 
-  const handleFromChange = (e, all) => {
-    setDataTable(all);
+  const handleAddFromChange = (e, all) => {
+    const db = all.product;
+    setDBAddProduct(db);
   };
 
   const showDrawer = () => {
-    setVisible(true);
+    setVisibleAdd(true);
   };
 
   const onClose = () => {
-    setVisible(false);
+    setVisibleAdd(false);
   };
 
   //=========== Sửa sản phẩm =====================
-  const handleBtnUpdateClick = () => {
-    const idUpdate = valueUpdate.id;
-    console.log(idUpdate);
+  const UpdateBtnOnClick = () => {
     dispatch(
-      updateTableApi(idUpdate, {
-        name: valueUpdate.name,
-        price: valueUpdate.price,
-        amount: valueUpdate.amount,
-        categoryId: valueUpdate.categoryId,
-        trademarkId: valueUpdate.trademarkId,
-        describe: valueUpdate.describe,
+      updateTableApi({
+        id: selectUpdate.id,
+        TenSanPham: valueUpdate.TenSanPham,
+        Gia: valueUpdate.Gia,
+        SoLuong: valueUpdate.SoLuong,
+        DanhMucSanPham: valueUpdate.DanhMucSanPham,
+        ThuongHieu: valueUpdate.ThuongHieu,
+        MoTa: valueUpdate.MoTa,
       })
     );
-    setUpdateProduct(false);
+    setVisibleUpdate(false);
   };
 
-  const UpdateProduct = (record) => {
-    setDefaultValueUpdate(record);
-    setUpdateProduct(true);
+  const UpdateOnClick = (record) => {
+    setSelectUpdate(record);
+    setVisibleUpdate(true);
   };
 
-  const handleValueUpdate = (e, all) => {
-    const newValue = all.user;
-    setValueUpdate(newValue);
+  const handleUpdateFromChange = (e, all) => {
+    const db = all.product;
+    setValueUpdate(db);
   };
 
-  const onCloseUpdateProduct = () => {
-    setDefaultValueUpdate('');
-    setUpdateProduct(false);
+  const onCloseUpdate = () => {
+    setSelectUpdate({});
+    setVisibleUpdate(false);
   };
 
   //=========== Chi tiết Sản Phẩm ==================
-
   const showProductDetails = () => {
-    setProductDetails(true);
+    setVisibleView(true);
   };
 
   const onCloseProductDetails = () => {
-    setProductDetails(false);
+    setVisibleView(false);
   };
 
   //=============== Thêm ảnh ==============================
@@ -170,39 +163,39 @@ const CacSanPham = () => {
   //=========== data table ======================
   const columns = [
     {
-      title: 'ID',
+      title: 'Mã SP',
       dataIndex: 'id',
       key: 'id',
       width: '6%',
     },
     {
       title: 'Sản phẩm',
-      dataIndex: 'name',
-      key: 'name',
+      dataIndex: 'TenSanPham',
+      key: 'TenSanPham',
       width: '42%',
     },
     {
       title: 'Giá',
-      dataIndex: 'price',
-      key: 'price',
+      dataIndex: 'Gia',
+      key: 'Gia',
       width: '15%',
     },
     {
       title: 'Số lượng',
-      dataIndex: 'amount',
-      key: 'amount',
+      dataIndex: 'SoLuong',
+      key: 'SoLuong',
       width: '10%',
     },
     {
       title: 'Danh mục sản phẩm',
-      dataIndex: 'categoryId',
-      key: 'categoryId',
+      dataIndex: 'DanhMucSanPham',
+      key: 'DanhMucSanPham',
       width: '11%',
     },
     {
       title: 'Thương hiệu',
-      dataIndex: 'trademarkId',
-      key: 'trademarkId',
+      dataIndex: 'ThuongHieu',
+      key: 'ThuongHieu',
       width: '11%',
     },
     {
@@ -212,7 +205,7 @@ const CacSanPham = () => {
       width: '15%',
       render: (text, record) => (
         <>
-          <BsPencilSquare onClick={() => UpdateProduct(record)} />
+          <BsPencilSquare onClick={() => UpdateOnClick(record)} />
           <BsTrash />
           <BsEye onClick={showProductDetails} />
         </>
@@ -253,31 +246,20 @@ const CacSanPham = () => {
           </Button>
         </Space>
       </div>
+      {/* cửa sổ thêm sản phẩm */}
       <Drawer
         title={<Title level={4}>Thêm Sản Phẩm</Title>}
         width={720}
         onClose={onClose}
-        visible={visible}
+        visible={visibleAdd}
         bodyStyle={{
           paddingBottom: 80,
         }}
       >
         <div className="main_addproduct">
-          <Form layout="vertical" onValuesChange={handleFromChange}>
+          <Form layout="vertical" onValuesChange={handleAddFromChange}>
             <Form.Item
-              name={['user', 'id']}
-              label="Id Sản phẩm"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-              <Input placeholder="Id Sản phẩm" />
-            </Form.Item>
-
-            <Form.Item
-              name={['user', 'name']}
+              name={['product', 'TenSanPham']}
               label="Sản phẩm"
               rules={[
                 {
@@ -285,35 +267,11 @@ const CacSanPham = () => {
                 },
               ]}
             >
-              <Input placeholder="Sản Phẩm" />
+              <Input placeholder="Tên Sản Phẩm" />
             </Form.Item>
 
             <Form.Item
-              name={['user', 'categoryId']}
-              label="Loại Sản Phẩm"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-              <Input placeholder="Loại sản phẩm " />
-            </Form.Item>
-
-            <Form.Item
-              name={['user', 'trademarkId']}
-              label="Thương Hiệu"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-              <Input placeholder="Thương hiệu" />
-            </Form.Item>
-
-            <Form.Item
-              name={['user', 'price']}
+              name={['product', 'Gia']}
               label="Giá"
               rules={[
                 {
@@ -325,18 +283,42 @@ const CacSanPham = () => {
             </Form.Item>
 
             <Form.Item
-              name={['user', 'amount']}
-              label="Số Lượng"
+              name={['product', 'SoLuong']}
+              label="Số lượng"
               rules={[
                 {
                   required: true,
                 },
               ]}
             >
-              <Input placeholder="Số Lượng" />
+              <Input placeholder="Số lượng" />
             </Form.Item>
 
-            <Form.Item name={['user', 'describe']} label="Mô tả">
+            <Form.Item
+              name={['product', 'DanhMucSanPham']}
+              label="Danh muc sản phẩm"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Input placeholder="Danh muc sản phẩm" />
+            </Form.Item>
+
+            <Form.Item
+              name={['product', 'ThuongHieu']}
+              label="Thương hiệu"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Input placeholder="Thương hiệu" />
+            </Form.Item>
+
+            <Form.Item name={['product', 'MoTa']} label="Mô tả">
               <TextArea rows={4} placeholder="Mô tả" />
             </Form.Item>
             <>
@@ -365,7 +347,7 @@ const CacSanPham = () => {
               </Modal> */}
             </>
             <Form.Item>
-              <Button onClick={handleAddBtnClick}>Thêm Sản Phẩm</Button>
+              <Button onClick={AddBtnOnClick}>Thêm Sản Phẩm</Button>
             </Form.Item>
           </Form>
         </div>
@@ -383,32 +365,19 @@ const CacSanPham = () => {
         />
       </div>
 
-      {/* ============= Drawer Sửa ======================= */}
+      {/* cửa sổ sửa sản phẩm */}
       <Drawer
         title="Sửa Sản Phẩm"
         placement="right"
-        onClose={onCloseUpdateProduct}
-        visible={updateProduct}
+        onClose={onCloseUpdate}
+        visible={visibleUpdate}
         size="large"
       >
-        <Form layout="vertical" onValuesChange={handleValueUpdate}>
+        <Form layout="vertical" onValuesChange={handleUpdateFromChange}>
           <Form.Item
-            name={['user', 'id']}
-            label="ID Sản phẩm"
-            initialValue={defaultValueUpdate.id}
-            rules={[
-              {
-                required: true,
-              },
-            ]}
-          >
-            <Input value={1} placeholder="ID Sản phẩm" />
-          </Form.Item>
-
-          <Form.Item
-            name={['user', 'name']}
+            name={['product', 'TenSanPham']}
             label="Sản phẩm"
-            initialValue={defaultValueUpdate.name}
+            initialValue={selectUpdate.TenSanPham}
             rules={[
               {
                 required: true,
@@ -419,9 +388,9 @@ const CacSanPham = () => {
           </Form.Item>
 
           <Form.Item
-            name={['user', 'price']}
+            name={['product', 'Gia']}
             label="Giá"
-            initialValue={defaultValueUpdate.price}
+            initialValue={selectUpdate.Gia}
             rules={[
               {
                 required: true,
@@ -432,9 +401,9 @@ const CacSanPham = () => {
           </Form.Item>
 
           <Form.Item
-            name={['user', 'amount']}
+            name={['product', 'SoLuong']}
             label="Số Lượng"
-            initialValue={defaultValueUpdate.amount}
+            initialValue={selectUpdate.SoLuong}
             rules={[
               {
                 required: true,
@@ -445,22 +414,22 @@ const CacSanPham = () => {
           </Form.Item>
 
           <Form.Item
-            name={['user', 'categoryId']}
-            label="Loại Sản Phẩm"
-            initialValue={defaultValueUpdate.categoryId}
+            name={['product', 'DanhMucSanPham']}
+            label="Danh mục Sản Phẩm"
+            initialValue={selectUpdate.DanhMucSanPham}
             rules={[
               {
                 required: true,
               },
             ]}
           >
-            <Input placeholder="Loại sản phẩm " />
+            <Input placeholder="Danh mục sản phẩm " />
           </Form.Item>
 
           <Form.Item
-            name={['user', 'trademarkId']}
+            name={['product', 'ThuongHieu']}
             label="Thương Hiệu"
-            initialValue={defaultValueUpdate.trademarkId}
+            initialValue={selectUpdate.ThuongHieu}
             rules={[
               {
                 required: true,
@@ -470,11 +439,7 @@ const CacSanPham = () => {
             <Input placeholder="Thương hiệu" />
           </Form.Item>
 
-          <Form.Item
-            name={['user', 'describe']}
-            label="Mô tả"
-            initialValue={defaultValueUpdate.describe}
-          >
+          <Form.Item name={['product', 'MoTa']} label="Mô tả" initialValue={selectUpdate.MoTa}>
             <TextArea rows={4} placeholder="Mô tả" />
           </Form.Item>
           <>
@@ -504,7 +469,7 @@ const CacSanPham = () => {
           </>
           <Form.Item>
             <Space size={16}>
-              <Button onClick={handleBtnUpdateClick}>Lưu</Button>
+              <Button onClick={UpdateBtnOnClick}>Lưu</Button>
               <Button>Hủy</Button>
             </Space>
           </Form.Item>
@@ -516,7 +481,7 @@ const CacSanPham = () => {
         title="Xem Chi Tiết Sản Phẩm"
         placement="right"
         onClose={onCloseProductDetails}
-        visible={productDetails}
+        visible={visibleView}
         size="large"
       >
         <p>Some contents...</p>
