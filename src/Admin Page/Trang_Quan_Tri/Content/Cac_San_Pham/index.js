@@ -5,7 +5,7 @@ import 'antd/dist/antd.css';
 import { BsPatchPlus, BsTrash, BsPencilSquare, BsEye } from 'react-icons/bs';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { addTableApi, fetchApiTable, updateTableApi } from './productSlice';
+import { addTableApi, fetchApiTable, updateTableApi, deleteTableApi } from './productSlice';
 import { todosRemainingSelecter } from '../../../../Redux/selectors';
 
 const { Title, Text } = Typography;
@@ -103,7 +103,7 @@ const CacSanPham = () => {
     setVisibleUpdate(false);
   };
 
-  const UpdateOnClick = (record) => {
+  const updateOnClick = (record) => {
     setSelectUpdate(record);
     setVisibleUpdate(true);
   };
@@ -116,6 +116,13 @@ const CacSanPham = () => {
   const onCloseUpdate = () => {
     setSelectUpdate({});
     setVisibleUpdate(false);
+  };
+
+  //=========== Xóa sản phẩm =======================
+  const deleteOnClick = (record) => {
+    const id = record.id;
+    console.log(id);
+    dispatch(deleteTableApi(id));
   };
 
   //=========== Chi tiết Sản Phẩm ==================
@@ -205,8 +212,8 @@ const CacSanPham = () => {
       width: '15%',
       render: (text, record) => (
         <>
-          <BsPencilSquare onClick={() => UpdateOnClick(record)} />
-          <BsTrash />
+          <BsPencilSquare onClick={() => updateOnClick(record)} />
+          <BsTrash onClick={() => deleteOnClick(record)} />
           <BsEye onClick={showProductDetails} />
         </>
       ),

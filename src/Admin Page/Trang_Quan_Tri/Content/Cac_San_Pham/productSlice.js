@@ -21,17 +21,16 @@ const productTableSlice = createSlice({
         state.status = 'idle';
       })
       .addCase(addTableApi.fulfilled, (state, action) => {
-        console.log('add state slice:', state);
-        console.log('add action slice:', action);
         state.productes.push(action.payload);
       })
       .addCase(updateTableApi.fulfilled, (state, action) => {
-        console.log('state slice:', state);
-        console.log('action slice:', action);
-        // let currentTodo = state.productes.find((p) => p.id === action.payload);
-        // console.log(currentTodo);
+        // console.log('state slice:', state.productes);
+        // console.log('action slice:', action.payload);
+        // const currentProduct = state.productes.filter((p) => p.id === action.payload.id);
+        // action.payload = currentProduct;
+
         state.productes = action.payload;
-      });
+      })
   },
 });
 
@@ -54,6 +53,12 @@ export const updateTableApi = createAsyncThunk('product/updateTableApi', async (
   const id = newTodo.id;
   const res = await productesService.updateProductesApi(id, newTodo);
   console.log('res:', res);
+  return res;
+});
+
+export const deleteTableApi = createAsyncThunk('product/deleteTableApi', async (id) => {
+  console.log(id)
+  const res = await productesService.deteleProductesApi(id);
   return res;
 });
 
